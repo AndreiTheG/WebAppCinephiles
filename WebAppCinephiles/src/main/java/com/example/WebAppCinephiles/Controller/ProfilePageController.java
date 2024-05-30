@@ -18,7 +18,6 @@ public class ProfilePageController {
     public MoviesAndTVSeriesRepository moviesAndTVSeriesRepository;
     public ActorRepository actorRepository;
     public UserRepository userRepository;
-    public long currentUserId;
     public FilmActorRepository filmActorRepository;
     public ReviewRepository reviewRepository;
     public CommentRepository commentRepository;
@@ -44,15 +43,12 @@ public class ProfilePageController {
     }
     @GetMapping("/profile_page/{idUser}/update_description/")
     public String updateDescription(Model model, @PathVariable("idUser") long idUser) {
-        System.out.println(idUser);
         if (idUser == 0) {
             return "redirect:/login/";
         }
         User user = userRepository.findById(idUser).orElseThrow();
-        System.out.println(user.getDescription());
-        System.out.println(user.getImageProfileSrc());
-        List<Movies> list = moviesAndTVSeriesRepository.findAll();
-        model.addAttribute("listOfMoviesAndTVSeries", list);
+//        List<Movies> list = moviesAndTVSeriesRepository.findAll();
+//        model.addAttribute("listOfMoviesAndTVSeries", list);
         model.addAttribute("user", user);
         return "profilePageDescription";
     }
@@ -85,24 +81,21 @@ public class ProfilePageController {
         }
         currentUser.setDescription(user.getDescription());
         userRepository.save(currentUser);
-        List<Movies> list = moviesAndTVSeriesRepository.findAll();
-        model.addAttribute("listOfMoviesAndTVSeries", list);
+//        List<Movies> list = moviesAndTVSeriesRepository.findAll();
+//        model.addAttribute("listOfMoviesAndTVSeries", list);
         model.addAttribute("user", currentUser);
         return "profilePage";
     }
 
     // Opens and displays the profile page
     @GetMapping("/profile_page/{idUser}/")
-    public String openProfilePage(Model model, User currentUser, @PathVariable("idUser") long idUser) {
-        System.out.println(currentUser);
+    public String openProfilePage(Model model, @PathVariable("idUser") long idUser) {
         if (idUser== 0) {
             return "redirect:/login/";
         }
-        System.out.println(currentUser);
         User user = userRepository.findById(idUser).orElseThrow();
-        System.out.println(user.getImageProfileSrc());
-        List<Movies> list = moviesAndTVSeriesRepository.findAll();
-        model.addAttribute("listOfMoviesAndTVSeries", list);
+//        List<Movies> list = moviesAndTVSeriesRepository.findAll();
+//        model.addAttribute("listOfMoviesAndTVSeries", list);
         model.addAttribute("user", user);
         return "profilePage";
     }
