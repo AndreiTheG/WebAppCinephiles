@@ -16,57 +16,6 @@
     let isCurrentStarClicked = [false, false, false, false, false, false, false, false,
     false, false];
     let nrTotalStars = 0;
-    // /*<![DATA[*/
-    // // nrStars = [[${review.rating}]];
-    // // console.log(nrStars);
-    // let listOfReviews = [[${listOfReviews}]];
-    // console.log(listOfReviews);
-    // /*]]>*/
-    // /*<![DATA[*/
-    // nrStars = [[${review.rating}]];
-    // console.log(nrStars);
-    // /*]]>*/
-    // for (let i = 0; i < nrStars; ++i) {
-    //     let star = document.getElementById('' + (i + 1) + '');
-    //     star.style.color = 'yellow';
-    // }
-    // function mouseOver(number) {
-    //     for (let i = 0; i < number; ++i) {
-    //         console.log(i);
-    //         let star = document.getElementById('' + (i + 1) + '');
-    //         star.style.color = 'red';
-    //     }
-    //     if (number < 10) {
-    //         for (let i = number; i < 10; ++i) {
-    //             console.log(i);
-    //             let star = document.getElementById('' + (i + 1) + '');
-    //             star.style.color = 'black';
-    //         }
-    //     }
-    // }
-    //
-    // function mouseOut(number) {
-    //     for (let i = 0; i < 10; ++i) {
-    //         console.log(isCurrentStarClicked[i]);
-    //     }
-    //     for (let i = 1; i <= number - 1; ++i) {
-    //         console.log(i);
-    //         let star = document.getElementById('' + i + '');
-    //         star.style.color = 'yellow';
-    //     }
-    //     // if (document.getElementById('' + number + '').onclick === false) {
-    //     //     console.log('Nu a fost apasat');
-    //     // }
-    //     if (isCurrentStarClicked[number - 1] === false && number < 10) {
-    //         for (let i = number; i <= 10; ++i) {
-    //             console.log(i);
-    //             let star = document.getElementById('' + i + '');
-    //             let color = star.color;
-    //             console.log(color);
-    //             star.style.color = 'black';
-    //         }
-    //     }
-    // }
 
     function pressStar(number) {
         console.log(number)
@@ -95,12 +44,8 @@
     }
 </script>
     <nav th:insert="~{home.html :: nav}"></nav>
-<!--    <div class="card" style="height: auto; margin-left: 15%; margin-right: 15%">-->
-<!--        <div class="card-body">-->
     <div class="box">
         <div class="box-content">
-<!--            <div class="card">-->
-<!--                <div class="card-body">-->
             <h1 class="title" th:text="${movie.name}"></h1>
             <br>
             <div class="col">
@@ -108,8 +53,6 @@
                     <img th:src="${movie.imageCover}" style="width: 150px; height: 200px">
                     <form action="#" th:action="@{/{idUser}/movie_page/{idMovie}/addFilm/(idUser=${user.id}, idMovie=${movie.id})}" th:object="${userFilmKey}" th:method="POST">
                         <button type="submit" th:field="*{movieId}" class="btn btn-danger"><i class="bi bi-bookmark-plus"></i></button>
-<!--                        <input type="submit" th:field="*{movieId}" class="btn btn-danger" value="<i class="bi bi-bookmark-plus"></i>Send">-->
-<!--                        <i class="bi bi-bookmark-plus"></i>-->
                     </form>
                     <div>
                         <h5 th:text="'Rating: ' + ${average}"></h5>
@@ -140,22 +83,18 @@
                     <p th:text="'Director: ' + ${movie.directorName}"></p>
                     <p th:text="'Writer: ' + ${movie.writer}"></p>
                     <h5>Genres</h5>
-<!--                    <a href="actorPage.html" th:text="${movie.genres}"></a>-->
-<!--                    <table>-->
                     <div th:each="genre : ${genres}" style="display: inline-block">
                         <div class="card" th:id="${genre.idGenre}">
                             <a th:text="${genre.name}"></a>
                         </div>
                     </div>
                     <br>
-<!--                    </table>-->
                     <h5>Actors</h5>
                     <div th:each="actor : ${actors}" style="display: inline-block">
                         <div class="card">
                             <a th:text="${actor.name}" ></a>
                         </div>
                     </div>
-<!--                    <p th:text="${actors}"></p>-->
                     <div id="commentSection">
                         <canvas id="myChart"></canvas>
                         <form action="#" th:action="@{/{idUser}/movie_page/{idMovie}/(idUser=${user.id}, idMovie=${movie.id})}"
@@ -172,11 +111,29 @@
                                     <h6 th:text="${comments.username}"></h6>
                                 </div>
                                 <div class="card-body">
-                                    <p th:text="${comments.content}"></p>
+                                    <p th:id="'textboxEdit' + ${comments.idComment} + ''"
+                                              th:text="${comments.content}" disabled></p>
                                 </div>
                                 <div id="data-post" style="display: flex; justify-content: flex-end">
                                     <small th:text="${comments.datePost}"></small>
                                 </div>
+                            </div>
+                            <div class="btn-group" role="group" >
+                                <button id="btnEdit" class="btn btn-dark"
+                                        th:onclick="'edit(' + ${comments.idComment} + ')'"
+                                >Edit</button>
+                                <form id="saveFormat" hidden="hidden" action="#" th:action="@{/:{idUser}/edit_comment/:{idComment}/from_movie/:{idCurrentMovie}/(idUser=${user.id}, idComment=${comments.idComment}, idCurrentMovie=${movie.id})}"
+                                      th:object="${comment}" method="post" >
+                                    <textarea th:text="${comments.content}" th:field="*{content}"></textarea>
+                                    <button id="btnSave" class="btn btn-dark" hidden="hidden">Save</button>
+                                </form>
+                                <form id="deleteFormat" action="#" th:action="@{/:{idUser}/delete_comment/:{idComment}/from_movie/:{idCurrentMovie}/(idUser=${user.id}, idComment=${comments.idComment}, idCurrentMovie=${movie.id})}"
+                                      th:object="${comments}" method="post">
+                                    <button id="deleteBtn" class="btn btn-danger">Delete</button>
+                                </form>
+                                <form action="#" th:action="@{/{idUser}/movie_page/{idCurrentMovie}/(idUser=${user.id}, idCurrentMovie=${movie.id})}" method="post">
+                                    <button id="btnCancel" class="btn btn-danger" hidden="hidden">Cancel</button>
+                                </form>
                             </div>
                         </div>
                         <br>
@@ -189,6 +146,19 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
     <script th:inline="javascript">
+        function edit(idComment) {
+            let editBtn = document.getElementById("btnEdit");
+            editBtn.hidden = true;
+            let saveFormat = document.getElementById("saveFormat");
+            saveFormat.hidden = false;
+            let saveBtn = document.getElementById("btnSave");
+            saveBtn.removeAttribute("hidden");
+            let deleteBtn = document.getElementById("deleteBtn");
+            deleteBtn.hidden = true;
+            let cancelBtn = document.getElementById("btnCancel");
+            cancelBtn.hidden = false;
+        }
+
         let textarea = document.getElementById('commentBox');
         textarea.textContent = '';
         let nrStars = 0;
