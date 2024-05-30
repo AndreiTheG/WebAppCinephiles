@@ -199,4 +199,21 @@ void saveAttributeModels(Model model, double average, List<Movies> listOfMovies,
                 comment, review, listOfRating, listOfComment, userFilmKey, filmGenres);
         return "movieDetails";
     }
+
+    @PostMapping("/:{idUser}/delete_comment/:{idComment}/from_movie/:{idCurrentMovie}/")
+    public String deleteComment(@PathVariable("idUser") long idUser, @PathVariable("idComment") long idComment,
+                                @PathVariable("idCurrentMovie") long idMovie) {
+        Comment comment = commentRepository.findById(idComment).orElseThrow();
+        commentRepository.delete(comment);
+        return "redirect:/" + idUser + "/movie_page/" + idMovie + "/";
+    }
+
+    @PostMapping("/:{idUser}/edit_comment/:{idComment}/from_movie/:{idCurrentMovie}/")
+    public String editComment(Model model, @PathVariable("idUser") long idUser, @PathVariable("idComment") long idComment,
+                                @PathVariable("idCurrentMovie") long idMovie, Comment currentComment) {
+        Comment comment = commentRepository.findById(idComment).orElseThrow();
+        comment.setContent(currentComment.getContent());
+        commentRepository.save(comment);
+        return "redirect:/" + idUser + "/movie_page/" + idMovie + "/";
+    }
 }
