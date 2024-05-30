@@ -201,24 +201,9 @@
                             }
                         }
                     }
-                    // let card = document.querySelector('.card');
-                    // let cardBody = document.createElement('div');
-                    // cardBody.className = 'card-body';
                     if (nrElem === nrGenresChecked && listOfResults[i][3] >= minYear && listOfResults[i][3] <= maxYear
                     && listOfResults[i][4] >= minRating && listOfResults[i][4] <= maxRating
                     && listOfResults[i][10] >= minReview && listOfResults[i][10] <= maxReview) {
-                        // card.innerHTML += '<div class="card" id="' + listOfResults[i][0] + '"' +
-                        //     ' onclick="redirectToTheMoviePage(' + listOfResults[i][0] + ')"><div class="card-body"> + '
-                        //     '<img src='
-                        //     + listOfResults[i][9] + ' style="width: 50px; height: 50px">' +
-                        //     <h4 th:text="${list.name}" style="display: inline-block; vertical-align: middle"></h4>
-                        // <br>
-                        //     <i className="bi bi-star-fill"></i>
-                        //     <p th:text="${#numbers.formatDecimal(list.rating, 1, 2, 'POINT')}"
-                        //        style="display: inline-block; vertical-align: center; margin-right: 20px"></p>
-                        //     <i className="fa-solid fa-eye"></i>
-                        //     <p th:text="${list.nrReviews}" style="display: inline-block; vertical-align: center"></p>
-                        // </br>
                            tbody.innerHTML += '<tr id="' + listOfResults[i][0] + '"' +
                             ' onclick="redirectToTheMoviePage(' + userId + ', ' + listOfResults[i][0] + ')"><td class="col" style="width: 50px">' +
                             '<img src='
@@ -237,8 +222,6 @@
                 }
                 table.appendChild(tbody);
                 document.body.appendChild(table);
-                // card.appendChild(cardBody);
-                // document.appendChild(card);
             }
 
             function pressResult(idMovie) {
@@ -332,7 +315,6 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" th:href="@{/profile_page/{idUser}/(idUser=${user.id})}">View Profile</a></li>
-<!--                <li><a class="dropdown-item" th:href="@{/premiumSubscription/}">Premium Option</a></li>-->
                 <li><a id="logout" class="dropdown-item bg-danger" th:href="@{/login/}">Log out</a></li>
             </ul>
         </div>

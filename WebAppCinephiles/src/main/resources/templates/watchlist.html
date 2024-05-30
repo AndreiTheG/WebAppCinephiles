@@ -11,7 +11,6 @@
     <script src="https://kit.fontawesome.com/c83dc83a83.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-danger" id="main">
-<!--    <nav th:insert="~{home.html :: nav}"></nav>-->
 <nav class="navbar navbar-expand-lg" id="navbar" style="background-color: black">
     <div id="sidebar" class="filter-list-checkboxes">
         <i class="bi bi-x-lg" style="float: right; top: 1px" onclick="closeSidebar()"></i>
@@ -201,24 +200,9 @@
                         }
                     }
                 }
-                // let card = document.querySelector('.card');
-                // let cardBody = document.createElement('div');
-                // cardBody.className = 'card-body';
                 if (nrElem === nrGenresChecked && listOfResults[i][3] >= minYear && listOfResults[i][3] <= maxYear
                     && listOfResults[i][4] >= minRating && listOfResults[i][4] <= maxRating
                     && listOfResults[i][10] >= minReview && listOfResults[i][10] <= maxReview) {
-                    // card.innerHTML += '<div class="card" id="' + listOfResults[i][0] + '"' +
-                    //     ' onclick="redirectToTheMoviePage(' + listOfResults[i][0] + ')"><div class="card-body"> + '
-                    //     '<img src='
-                    //     + listOfResults[i][9] + ' style="width: 50px; height: 50px">' +
-                    //     <h4 th:text="${list.name}" style="display: inline-block; vertical-align: middle"></h4>
-                    // <br>
-                    //     <i className="bi bi-star-fill"></i>
-                    //     <p th:text="${#numbers.formatDecimal(list.rating, 1, 2, 'POINT')}"
-                    //        style="display: inline-block; vertical-align: center; margin-right: 20px"></p>
-                    //     <i className="fa-solid fa-eye"></i>
-                    //     <p th:text="${list.nrReviews}" style="display: inline-block; vertical-align: center"></p>
-                    // </br>
                     tbody.innerHTML += '<tr id="' + listOfResults[i][0] + '"' +
                         ' onclick="redirectToTheMoviePage(' + listOfResults[i][0] + ')"><td class="col" style="width: 50px">' +
                         '<img src='
@@ -243,8 +227,6 @@
             }
             table.appendChild(tbody);
             document.body.appendChild(table);
-            // card.appendChild(cardBody);
-            // document.appendChild(card);
         }
 
         function pressResult(idMovie) {
@@ -329,22 +311,16 @@
                aria-label="Input group example" aria-describedby="basic-addon1">
         <div class="form-popup dropdown" id="resultGroup" role="listbox" style="border-radius: 10px;"></div>
     </div>
-    <!--        <div class="flex-box" style="color: white;">-->
     <a id="facebook" href="https://www.facebook.com/andreialex.alexandru/"><i class="bi bi-facebook" style="color: white;"></i></a>
     <a id="instagram" href="https://www.instagram.com/andrei2631/"><i class="bi bi-instagram" style="margin-left: 20px; color: white;"></i></a>
-    <!--        </div>-->
-    <!--        <a class="username" th:href="@{/profile_page/{idUser}/(idUser=${user.id})}" th:text="${user.username}" style="-->
-    <!--        color: white; margin-left: 20px; text-decoration:none"></a>-->
     <a class="myWatchlist" style="margin-left: 20px" th:href="@{/{idUser}/watchlist/(idUser=${user.id})}"><i class="bi bi-bookmark-fill" style="color: white"></i></a>
     <a class="chat" style="margin-left: 20px" th:href="@{/chat/{idUserSender}/(idUserSender=${user.id})}"><i class="bi bi-chat-fill" style="color: white"></i></a>
-    <!--        <a id="logout" class="btn btn-danger" th:href="@{/login/}" style="margin-left: 20px; margin-right: auto">Log out</a>-->
     <div class="dropdown" style="margin-left: 20px; margin-right: auto">
         <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${user.username}">
         </button>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" th:href="@{/profile_page/{idUser}/(idUser=${user.id})}">View Profile</a></li>
             <li><a class="dropdown-item" th:href="@{//}">Premium Option</a></li>
-            <!--                <li><button class="dropdown-item" type="button">Another action</button></li>-->
             <li><a id="logout" class="dropdown-item bg-danger" th:href="@{/login/}">Log out</a></li>
         </ul>
     </div>
