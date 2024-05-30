@@ -1,0 +1,196 @@
+#sidebar {
+    height : 100%;
+    width : 0;
+    position : fixed;
+    color: white;
+    z-index : 1;
+    top : 0;
+    left : 0;
+    background-color : #111;
+    overflow-x : hidden;
+    transition : 0.5s;
+    /*padding-top : 60px;*/
+}
+
+.form-popup {
+    background-color: #fff8f0;
+    border: 0 solid lightgrey;
+    display: none;
+    position: fixed;
+    margin-top: 50px;
+    margin-left: 230px;
+    width: 400px;
+    overflow-y: hidden;
+    /*top: 50px;*/
+    /*left: 500px;*/
+    /*bottom: 0;*/
+}
+
+.navbar-brand {
+    margin-left: auto;
+}
+
+#inputGroup {
+    width: 400px;
+}
+/*.form-popup #results:hover {*/
+/*    background-color: lightblue;*/
+/*}*/
+
+.list-group-item:hover {
+    opacity: 90%;
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+input:hover {
+    outline: none;
+}
+
+#main {
+    transition: margin-left .5s;
+}
+
+.ms-n5 {
+    margin-left: -40px;
+}
+
+.filter-list-checkboxes input {
+    accent-color: red;
+}
+
+
+/*.checkbox:checked {*/
+/*    accent-color: red;*/
+/*}*/
+/*form.d-flex {*/
+/*    margin-left: 50px;*/
+/*}*//* || PRIMARY MENU || */
+
+/*.primary-nav {*/
+/*    align-items: center;*/
+/*    height: 50px;*/
+/*    left: 0px;*/
+/*    padding: 15px;*/
+/*    width: 100%;*/
+/*    margin: 0px;*/
+/*    background-color: darkgray;*/
+/*    display: inline;*/
+/*    position: fixed;*/
+/*    top: 70px;*/
+/*    z-index: 3;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*.search-container {*/
+/*    align-items: center;*/
+/*    display: flex;*/
+/*    justify-content: left;*/
+/*}*/
+
+/*form .no-submit {*/
+/*    width: 180px;*/
+/*    align-items: center;*/
+/*    color: white;*/
+/*    right: 0;*/
+/*    display: flex;*/
+/*    padding: 2px;*/
+/*    border: 1px solid currentColor;*/
+/*    border-radius: 5px;*/
+/*    margin: 0 0;*/
+/*}*/
+
+/*input.no-submit {*/
+/*    border: 1px solid white;*/
+/*    width: 100%;*/
+/*    padding: 9px 4px 9px 4px;*/
+/*    background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg");*/
+/*    background-size: 13px;*/
+/*    background-repeat: no-repeat;*/
+/*    background-position: 10px center;*/
+/*}*/
+
+/*input[type="search"] {*/
+/*    border: none;*/
+/*    background-color: transparent;*/
+/*    margin: 0;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    padding: 7px 8px 7px 30px;*/
+/*    font-size: 16px;*/
+/*    color: inherit;*/
+/*    border: 1px solid black;*/
+/*    border-radius: inherit;*/
+/*}*/
+
+/*input[type="search"]::placeholder {*/
+/*    color: white;*/
+/*}*/
+
+/*input[type="search"]:focus {*/
+/*    box-shadow: 0 0 3px 0 #3f69a8;*/
+/*    border-color: #3f69a8;*/
+/*    outline: none;*/
+/*}*/
+
+/*@media screen and (max-width: 786px) {*/
+/*    !*.navbar navbar-expand-lg{*!*/
+/*    !*    position : fixed;*!*/
+/*    !*    display: flex;*!*/
+/*    !*    flex-wrap: wrap;*!*/
+/*    !*}*!*/
+/*    .form-popup {*/
+/*        width: 300px;*/
+/*    }*/
+
+/*    .navbar-brand {*/
+/*        display: flex;*/
+/*        justify-content: flex-start;*/
+/*        margin: 0;*/
+/*    }*/
+
+/*    #menu {*/
+/*        display: none;*/
+/*    }*/
+
+/*    #inputGroup {*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        margin: auto;*/
+/*        max-width: 300px;*/
+/*    }*/
+
+
+/*    !*#sidebar {*!*/
+/*    !*    display: none;*!*/
+/*    !*}*!*/
+
+/*    .flex-box {*/
+/*        display: none;*/
+/*    }*/
+
+/*    .username {*/
+/*        display: none;*/
+/*    }*/
+/*    !*#sidebar {*!*/
+/*    !*    height : 0;*!*/
+/*    !*    width : 100%;*!*/
+/*    !*    margin-top: 250px;*!*/
+/*    !*    transition : 0.5s;*!*/
+/*    !*    position : fixed;*!*/
+/*    !*    color: white;*!*/
+/*    !*    z-index : 1;*!*/
+/*    !*    top : 0;*!*/
+/*    !*    left : 0;*!*/
+/*    !*    background-color : #111;*!*/
+/*    !*}*!*/
+
+
+/*    .d-flex btn btn-danger {*/
+/*        margin-left: 0;*/
+/*    }*/
+
+/*    #logout {*/
+/*        display: none;*/
+/*    }*/
+/*}*/

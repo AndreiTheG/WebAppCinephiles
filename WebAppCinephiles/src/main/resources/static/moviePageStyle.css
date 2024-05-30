@@ -1,0 +1,350 @@
+#sidebar {
+    height : 100%;
+    width : 0;
+    position : fixed;
+    color: white;
+    z-index : 1;
+    top : 0;
+    left : 0;
+    background-color : #111;
+    overflow-x : hidden;
+    transition : 0.5s;
+    /*padding-top : 60px;*/
+}
+
+.form-popup {
+    background-color: #fff8f0;
+    border: 0 solid lightgrey;
+    display: none;
+    position: fixed;
+    margin-top: 50px;
+    margin-left: 230px;
+    width: 400px;
+}
+
+.rating {
+    background-color: #fff8f0;
+    border: 0 solid lightgrey;
+    display: none;
+    position: fixed;
+    margin-top: 50px;
+    margin-left: 230px;
+    width: 50px;
+}
+
+.navbar-brand {
+    margin-left: auto;
+}
+
+#inputGroup {
+    width: 400px;
+}
+
+/*.card-body .title {*/
+/*    flex-direction: row;*/
+/*    justify-content: flex-start;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.card-body .col {*/
+/*    display: flex;*/
+/*    !*margin-left: 5%;*!*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*}*/
+
+/*!*.card-body .col .cover-image {*!*/
+/*!*    !*display: flex;*!*!*/
+/*!*    !*margin-left: 5%;*!*!*/
+/*!*    margin-right: 10%;*!*/
+/*!*}*!*/
+
+/*.card-body .col #description {*/
+/*    flex-direction: row;*/
+/*    !*justify-content: center;*!*/
+/*    justify-content: flex-start;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    !*grid-column-start: 6;*!*/
+/*    !*margin-left;*!*/
+/*}*/
+
+/*.card-body .col #description #commentBox {*/
+/*    width: 400px;*/
+/*    height: 200px;*/
+/*    !*resize: none;*!*/
+/*}*/
+
+.box {
+    background-color: white;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.box-content {
+    margin-left: 10%;
+    margin-right: 10%;
+    justify-content: center;
+}
+
+.box-content .title {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+.box-content .col {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box-content .col #description {
+        flex-direction: row;
+        /*justify-content: center;*/
+        justify-content: flex-end;
+        margin-left: 30%;
+        margin-right: 10%;
+        /*grid-column-start: 6;*/
+        /*margin-left;*/
+    /*flex-direction: row;*/
+    /*justify-content: center;*/
+    /*margin-left: 10%;*/
+    /*grid-column-start: 6;*/
+    /*margin-left;*/
+}
+
+.box-content .col #description #commentSection #commentBox {
+    width: 400px;
+    height: 200px;
+}
+
+.filter-list-checkboxes input {
+    accent-color: red;
+}
+
+.list-group-item:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+input:hover {
+    outline: none;
+}
+
+#main {
+    transition: margin-left .5s;
+}
+
+.ms-n5 {
+    margin-left: -40px;
+}
+
+@media screen, (width: 1200px) and (max-width: 1300px) {
+    /*.navbar-brand {*/
+    /*    display: flex;*/
+    /*    justify-content: flex-start;*/
+    /*    margin: 0;*/
+    /*}*/
+
+    /*#menu {*/
+    /*    display: none;*/
+    /*}*/
+
+    #inputGroup {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        max-width: 400px;
+    }
+
+    .form-popup {
+        width: 300px;
+    }
+
+    #myChart {
+        width: 50%;
+        height: 40%;
+    }
+    /*.box-content .col #description {*/
+    /*    flex-direction: row;*/
+    /*    !*justify-content: center;*!*/
+    /*    justify-content: flex-end;*/
+    /*    margin-left: 10%;*/
+    /*}*/
+    /*#sidebar {*/
+    /*    display: none;*/
+    /*}*/
+
+    /*.flex-box {*/
+    /*    display: none;*/
+    /*}*/
+
+    /*.username {*/
+    /*    display: none;*/
+    /*}*/
+
+    /*.navbar navbar-expand-lg, .input-group{*/
+    /*    display: flex;*/
+    /*    flex-wrap: wrap;*/
+    /*}*/
+
+    /*.box-content {*/
+    /*    display: flow;*/
+    /*}*/
+
+    /*.box-content .col {*/
+    /*    display: flow;*/
+    /*    !*margin-left: 5%;*!*/
+    /*    !*margin-right: 5%;*!*/
+    /*}*/
+
+    /*.card-body .col #description .card-body {*/
+    /*    width: fit-content;*/
+    /*}*/
+
+    /*.card-body .col #description {*/
+    /*    display: flow;*/
+    /*    flex-direction: column;*/
+    /*    justify-content: center;*/
+    /*    margin-right: auto;*/
+    /*}*/
+
+    /*.card-body .col #description .card {*/
+    /*    display: flow;*/
+    /*    flex-direction: row;*/
+    /*    justify-content: center;*/
+    /*    margin-right: auto;*/
+    /*}*/
+
+    /*.box-content .col #description {*/
+    /*        display: flow;*/
+    /*        flex-direction: column;*/
+    /*        justify-content: center;*/
+    /*        margin-right: auto;*/
+    /*}*/
+
+    .box-content .col #description {
+        flex-direction: row;
+        /*justify-content: center;*/
+        justify-content: flex-end;
+        margin-left: 20%;
+        margin-right: 10%;
+        /*grid-column-start: 6;*/
+        /*margin-left;*/
+        /*flex-direction: row;*/
+        /*justify-content: center;*/
+        /*margin-left: 10%;*/
+        /*grid-column-start: 6;*/
+        /*margin-left;*/
+    }
+
+    .card-container {
+        margin-right: 10%;
+    }
+}
+
+/*.navbar-brand {*/
+/*    display: flex;*/
+/*    justify-content: flex-start;*/
+/*    margin: 0;*/
+/*}*/
+
+@media screen and (max-width: 1200px) {
+    .navbar-brand {
+        display: flex;
+        justify-content: flex-start;
+        margin: 0;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    #myChart {
+        width: 50%;
+        height: 40%;
+    }
+
+    #inputGroup {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        max-width: 300px;
+    }
+
+    .form-popup {
+        width: 300px;
+    }
+    /*#sidebar {*/
+    /*    display: none;*/
+    /*}*/
+
+    .flex-box {
+        display: none;
+    }
+
+    .username {
+        display: none;
+    }
+
+    .navbar navbar-expand-lg, .input-group{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    /*.card-body {*/
+    /*    display: flow;*/
+    /*}*/
+
+    /*.card-body .col {*/
+    /*    display: flow;*/
+    /*    margin-left: auto;*/
+    /*    margin-right: auto;*/
+    /*}*/
+
+    /*.card-body .col #description {*/
+    /*    display: flow;*/
+    /*    flex-direction: column;*/
+    /*    justify-content: center;*/
+    /*    margin-right: auto;*/
+    /*}*/
+
+    .box-content {
+        display: flow;
+    }
+
+    .box-content .col {
+        display: flow;
+        flex-direction: column;
+    }
+
+
+    /*.box-content .cover-image {*/
+    /*    margin-left: 50%;*/
+    /*}*/
+
+    .box-content .col #description {
+        margin-left: 0;
+    }
+
+    #commentBox {
+        width: fit-content;
+        height: 300px;
+    }
+
+    #commentSection {
+        width: fit-content;
+    }
+
+    #myChart {
+        width: 50px;
+    }
+}
+
+/*@media screen and (max-width: 800px) {*/
+/*    #commentBox {*/
+/*        width: 150px;*/
+/*        height: 90px;*/
+/*    }*/
+/*}*/

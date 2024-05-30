@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chat Messages</title>
+    <link rel="icon" href="/image/Logo_image.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/chatStyle.css">
+    <script src="https://kit.fontawesome.com/c83dc83a83.js" crossorigin="anonymous"></script>
+</head>
+<body id="main" style="background-color: #fff8f0">
+    <nav id="navbar" class="navbar bg-dark fixed-top border-bottom border-secondary">
+        <a class="navbar-brand" th:href="@{/home/{idUser}/(idUser=${user.id})}" style="color: white;">
+            <img src="/image/Logo_image.png" style="width: 40px;
+            height: 40px; border-radius: 50%"></a>
+    </nav>
+    <div id="sidebar" class="bg-dark">
+        <div id="search-contacts">
+            <nav class="navbar bg-dark border-bottom border-secondary" style="justify-content: left">
+                <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Avatar"
+                     style="width: 40px; height: 40px; border-radius: 50%">
+                <h5 th:text="${user.name}" style="margin-left: 10px"/>
+            </nav>
+            <div class="input-group">
+                <button class="btn rounded-start-pill" style="background-color: white" onclick="enableInputSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+                <input id="findUser" class="form-control rounded-end-pill" placeholder="Search or start new chat"
+                       type="text" readonly>
+            </div>
+        </div>
+        <div class="my-friends">
+            <ul class="list-group" th:each="users : ${listOfUsers}">
+                <a style="text-decoration:none" th:href="@{/chat/{userIdSender}/sends_to/{userIdReceiver}/(userIdSender=${user.id}, userIdReceiver=${users.id})}">
+                    <li th:id="'friend'+${users.id}"
+                        th:if="${users.id != friend.id}"
+                        th:class="'card text-bg-dark list-group-item-action'"
+                         style="border-radius: 0">
+                        <div class="content">
+                            <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Avatar"
+                                 style="width: 40px; height: 40px; border-radius: 50%">
+                            <h5 class="name" th:text="${users.name}"/>
+                        </div>
+                    </li>
+                    <li th:id="'friend'+${users.id}"
+                        th:if="${users.id == friend.id}"
+                        th:class="'card'" th:style="'background-color: hsl(0, 0%, 20%);'"
+                        style="border-radius: 0">
+                        <div>
+                            <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+                                 alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%">
+                            <h5 class="name" th:text="${users.name}"/>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <nav id="navbar-main" th:if="${message.userIdReceiver != 0}"
+         class="navbar bg-danger fixed-top border-bottom border-secondary">
+        <div class="container-fluid" style="justify-content: left">
+            <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Avatar"
+                 style="width: 50px; height: 50px; border-radius: 50%">
+            <div class="card-container" style="display: flex; justify-content: center; flex-direction: column;
+            align-items: center">
+                <h5 id="user-receiver" th:if="${message.userIdReceiver != 0}" th:text="${friend.name}"
+                    style="margin-left: 10px"></h5>
+                <p style="justify-content: left; margin-left: 5px">Online</p>
+            </div>
+        </div>
+    </nav>
+    <div id="main-content" style="margin-top: 70px">
+        <div class="messages" th:if="${friend.id != 0}" th:each="messages : ${messages}">
+            <div id="message-sent" th:if="${messages.userIdSender == user.id}" class="card text-bg-danger mb-3">
+                <div id="messageSent" class="card-body" th:text="${messages.content}"></div>
+            </div>
+            <div id="message-received" th:if="${messages.userIdReceiver == user.id}" class="card text-bg-dark mb-3">
+                <div id="messageReceived" class="card-body" th:text="${messages.content}"></div>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-bottom" id="msg-box">
+        <div class="input-group">
+            <input class="form-control border-end rounded-start-pill" id="message-box" placeholder="Message..."
+                   type="text">
+            <button class="btn border-start-0 border-top border-bottom border-light-subtle"
+                 id="emoji-selector"><i class="fa-sharp fa-regular fa-face-smile"></i></button>
+            <button type="submit" class="btn border-light-subtle border-start-0 rounded-end-pill"
+                 id="message-submit" onclick="sendTheMessage()">
+                <i class="fa-sharp fa-solid fa-paper-plane" style="color: red"></i></button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:inline="javascript">
+        let inputFindFriend = document.getElementById('findUser');
+        let result = '';
+        let userIdSender = 0;
+        let userIdReceiver = 0;
+        let messageValue = '';
+        /*<![CDATA[*/
+        userIdSender = [[${user.id}]];
+        userIdReceiver = [[${friend.id}]];
+        messageValue = [[${message}]]
+        /*]]>*/
+        function enableInputSearch() {
+            if (document.getElementById('findUser').readOnly === true) {
+                document.getElementById('findUser').readOnly = false;
+                document.getElementById('findUser').style.pointerEvents = 'auto';
+                document.getElementById('findUser').focus();
+            } else if (document.getElementById('findUser').readOnly === false) {
+                document.getElementById('findUser').readOnly = true;
+            }
+        }
+        inputFindFriend.addEventListener('click', () => {
+            inputFindFriend.readOnly = false;
+            inputFindFriend.style.pointerEvents = 'auto';
+            inputFindFriend.focus()
+            inputFindFriend.addEventListener('keydown', (event) => {
+                let listOfUsers;
+                /*<![CDATA[*/
+                listOfUsers = [[${listOfUsers}]];
+                /*]]>*/
+                if (event.key.length === 1 || event.key === 'Enter') {
+                    if (event.key !== 'Enter') {
+                        result += event.key;
+                    }
+                    let nrUsers = listOfUsers.length;
+                    let myFriends = document.querySelector('.my-friends');
+                    myFriends.innerHTML = '';
+                    for (let i = 0; i < nrUsers; ++i) {
+                        if (listOfUsers[i]['name'].includes(result) && result !== '') {
+                            console.log(listOfUsers[i]['name']);
+                            let ul = document.createElement('ul');
+                            ul.className = 'list-group';
+                            let a = document.createElement('a');
+                            a.href = '/chat/' + userIdSender + '/sends_to/' + listOfUsers[i]['id'] + '/';
+                            a.style.textDecoration = 'none';
+                            let li = document.createElement('li');
+                            if (listOfUsers[i]['id'] === userIdReceiver) {
+                                li.className = 'card';
+                                li.style.backgroundColor = 'hsl(0, 0%, 20%)';
+                            } else {
+                                li.className = 'card text-bg-dark';
+                            }
+                            let divUser = document.createElement('div');
+                            divUser.className = 'content';
+                            let image = document.createElement('img');
+                            image.src = 'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=';
+                            image.alt = 'Avatar';
+                            image.style.width = '40px';
+                            image.style.height = '40px';
+                            image.style.borderRadius = '50%';
+                            let h5 = document.createElement('h5');
+                            h5.innerHTML = listOfUsers[i]['name'];
+                            h5.style.display = 'inline';
+                            h5.style.marginLeft = '5px';
+                            divUser.appendChild(image);
+                            divUser.appendChild(h5);
+                            li.appendChild(divUser);
+                            a.appendChild(li);
+                            ul.appendChild(a);
+                            myFriends.appendChild(ul);
+                        }
+                    }
+                } else if (event.key === 'Backspace') {
+                    result = result.slice(0, -1);
+                    let nrUsers = listOfUsers.length;
+                    let myFriends = document.querySelector('.my-friends');
+                    myFriends.innerHTML = '';
+                    console.log(userIdReceiver);
+                    for (let i = 0; i < nrUsers; ++i) {
+                        if (listOfUsers[i]['name'].includes(result)) {
+                            console.log(listOfUsers[i]['name']);
+                            let ul = document.createElement('ul');
+                            ul.className = 'list-group';
+                            let a = document.createElement('a');
+                            a.href = '/chat/' + userIdSender + '/sends_to/' + listOfUsers[i]['id'] + '/';
+                            a.style.textDecoration = 'none';
+                            let li = document.createElement('li');
+                            if (listOfUsers[i]['id'] === userIdReceiver) {
+                                li.className = 'card';
+                                li.style.backgroundColor = 'hsl(0, 0%, 20%)';
+                            } else {
+                                li.className = 'card text-bg-dark';
+                            }
+                            let divUser = document.createElement('div');
+                            divUser.className = 'content';
+                            let image = document.createElement('img');
+                            image.src = 'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=';
+                            image.alt = 'Avatar';
+                            image.style.width = '40px';
+                            image.style.height = '40px';
+                            image.style.borderRadius = '50%';
+                            let h5 = document.createElement('h5');
+                            h5.innerHTML = listOfUsers[i]['name'];
+                            h5.style.display = 'inline';
+                            h5.style.marginLeft = '5px';
+                            divUser.appendChild(image);
+                            divUser.appendChild(h5);
+                            li.appendChild(divUser);
+                            a.appendChild(li);
+                            ul.appendChild(a);
+                            myFriends.appendChild(ul);
+                        }
+                    }
+
+                }
+                console.log(result);
+            })
+        })
+
+        const msgBox = document.getElementById('msg-box');
+        if (userIdReceiver === 0) {
+            msgBox.style.display = 'none';
+        }
+        let socket = new SockJS('/ws');
+        let stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/public', function (message) {
+                let currentMessage = JSON.parse(message.body);
+                currentMessage['content'] = currentMessage['content'].trim();
+                if (userIdSender === currentMessage['userIdReceiver']
+                    && userIdReceiver === currentMessage['userIdSender']
+                    && currentMessage['content'].length > 0) {
+                    let mainPage = document.getElementById('main-content');
+                    let listOfMessages = document.createElement('div');
+                    listOfMessages.className = 'messages';
+                    let messageCard = document.createElement('div');
+                    messageCard.className = "card text-bg-dark mb-3";
+                    messageCard.id="message-received";
+                    let currMessage = document.createElement('div');
+                    currMessage.className = 'card-body';
+                    currMessage.id = 'messageReceived';
+                    currMessage.textContent = currentMessage['content'];
+                    messageCard.appendChild(currMessage);
+                    listOfMessages.appendChild(messageCard);
+                    mainPage.appendChild(listOfMessages);
+                }
+            });
+        });
+
+        document.getElementById('message-box').addEventListener('keydown', (event) => {
+           if (event.key === 'Enter') {
+               messageValue['content'] = document.getElementById('message-box').value;
+               stompClient.send('/app/ws', {}, JSON.stringify(messageValue));
+               messageValue['content'] = messageValue['content'].trim();
+               if (messageValue['content'].length !== 0) {
+                   let mainPage = document.getElementById('main-content');
+                   let listOfMessages = document.createElement('div');
+                   listOfMessages.className = 'messages';
+                   let messageCard = document.createElement('div');
+                   messageCard.className = "card text-bg-danger mb-3";
+                   messageCard.id="message-sent";
+                   let currMessage = document.createElement('div');
+                   currMessage.className = 'card-body';
+                   currMessage.id = 'messageSent';
+                   currMessage.textContent = messageValue['content'];
+                   messageCard.appendChild(currMessage);
+                   listOfMessages.appendChild(messageCard);
+                   mainPage.appendChild(listOfMessages);
+               }
+               document.getElementById('message-box').value = '';
+           }
+        })
+
+        function sendTheMessage() {
+            messageValue['content'] = document.getElementById('message-box').value;
+            stompClient.send('/app/ws', {}, JSON.stringify(messageValue));
+            messageValue['content'] = messageValue['content'].trim();
+            if (messageValue['content'].length !== 0) {
+                let mainPage = document.getElementById('main-content');
+                let listOfMessages = document.createElement('div');
+                listOfMessages.className = 'messages';
+                let messageCard = document.createElement('div');
+                messageCard.className = "card text-bg-danger mb-3";
+                messageCard.id="message-sent";
+                let currMessage = document.createElement('div');
+                currMessage.className = 'card-body';
+                currMessage.id = 'messageSent';
+                currMessage.textContent = messageValue['content'];
+                messageCard.appendChild(currMessage);
+                listOfMessages.appendChild(messageCard);
+                mainPage.appendChild(listOfMessages);
+            }
+            document.getElementById('message-box').value = '';
+        }
+    </script>
+</body>
+</html>

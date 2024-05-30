@@ -1,0 +1,225 @@
+#sidebar {
+    height : 100%;
+    width : 0;
+    position : fixed;
+    color: white;
+    z-index : 1;
+    top : 0;
+    left : 0;
+    background-color : #111;
+    overflow-x : hidden;
+    transition : 0.5s;
+    /*padding-top : 60px;*/
+}
+
+.box {
+    background-color: white;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 900px;
+}
+
+.box-content {
+    /*margin-left: 10%;*/
+    /*margin-right: 10%;*/
+    /*padding-right: 10%;*/
+    /*margin-right: 10%;*/
+    /*margin-top: 10%;*/
+    /*margin-right: 10%;*/
+    justify-content: center;
+}
+
+.box-content .col {
+    /*margin-top: 10%;*/
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+/*.box .box-content .col .description #textbox{*/
+/*    !*display: inline-block;*!*/
+/*    !*flex-direction: row;*!*/
+/*    !*justify-content: center;*!*/
+/*    !*padding-left: 20%;*!*/
+/*    margin-right: 25%;*/
+/*    !*grid-column-start: 6;*!*/
+/*    !*margin-left;*!*/
+/*}*/
+
+/*.box-content .col #description {*/
+/*    display: inline-block;*/
+/*    flex-direction: row;*/
+/*    !*justify-content: center;*!*/
+/*    margin-left: 25%;*/
+/*    !*grid-column-start: 6;*!*/
+/*    !*margin-left;*!*/
+/*}*/
+
+
+/*.profile-pic {*/
+/*    color: transparent;*/
+/*    !*transition: all .3s ease;*!*/
+/*}*/
+
+.profile-pic {
+    display: inline-block;
+    /*width:165px;*/
+    /*height:165px;*/
+    /*box-shadow: 0 0 10px 0 rgba(255,255,255,.35);*/
+    /*border-radius: 100px;*/
+    /*align-items: flex-start;*/
+}
+
+input {
+    display: none;
+}
+
+img {
+    cursor: pointer;
+    width:165px;
+    height:165px;
+    /*box-shadow: 0 0 10px 0 rgba(255,255,255,.35);*/
+    border-radius: 100px;
+    transition: .5s ease;
+    /*z-index: 0;*/
+}
+
+/*.-label {*/
+/*    !*position: absolute;*!*/
+/*    cursor: pointer;*/
+/*    height: 165px;*/
+/*    width: 165px;*/
+/*}*/
+
+/*.-label:hover  {*/
+/*    !*position: absolute;*!*/
+/*    !*opacity: 10;*!*/
+/*    background-color: rgba(0,0,0,.8);*/
+/*    z-index: 10000;*/
+/*    color: rgb(0,0,0);*/
+/*    !*transition: background-color .2s ease-in-out;*!*/
+/*    border-radius: 100px;*/
+/*}*/
+.profile-pic:hover .image {
+    /*background-color: rgba(0,0,0,.8);*/
+    opacity: 0.3;
+    /*transition: background-color;*/
+    /*transition: background-color .2s ease-in-out;*/
+}
+
+span {
+    display: inline-flex;
+    padding: .2em;
+    height: 2em;
+}
+
+
+/*.container {*/
+/*    background-color: white;*/
+/*}*/
+
+/*.section {*/
+/*    height: 90%;*/
+/*    color: white;*/
+/*    background-color: black;*/
+/*    width: 200px;*/
+/*}*/
+
+.form-popup {
+    background-color: #fff8f0;
+    border: 0 solid lightgrey;
+    display: none;
+    position: fixed;
+    margin-top: 50px;
+    margin-left: 230px;
+    width: 400px;
+    /*top: 50px;*/
+    /*left: 500px;*/
+    /*bottom: 0;*/
+}
+
+.filter-list-checkboxes input {
+    accent-color: red;
+}
+
+.list-group-item:hover {
+    opacity: 90%;
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+.navbar-brand {
+    margin-left: auto;
+}
+
+#inputGroup {
+    width: 400px;
+}
+
+input:hover {
+    outline: none;
+}
+
+#main {
+    transition: margin-left .5s;
+}
+
+.ms-n5 {
+    margin-left: -40px;
+}
+
+@media screen and (max-width: 786px) {
+    .navbar navbar-expand-lg, .input-group{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    #inputGroup {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        max-width: 300px;
+    }
+
+    .form-popup {
+        width: 300px;
+    }
+    /*#sidebar {*/
+    /*    display: none;*/
+    /*}*/
+
+    .flex-box {
+        display: none;
+    }
+
+    .username {
+        display: none;
+    }
+
+    .navbar navbar-expand-lg, .input-group{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .box-content {
+        display: flow;
+    }
+
+    .box-content .col {
+        display: flow;
+    }
+
+    .box-content .col #description {
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+}
+
+#description {
+    align-items: center;
+    text-align: center;
+}

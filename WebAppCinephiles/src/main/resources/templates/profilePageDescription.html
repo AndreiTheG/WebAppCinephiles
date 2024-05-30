@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${user.name}+' '+${user.surname}"></title>
+  <link rel="icon" href="/image/Logo_image.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/profilePageDescription.css">
+  <script src="https://kit.fontawesome.com/c83dc83a83.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-danger" id="main">
+<nav th:insert="~{home.html :: nav}"></nav>
+<div class="box">
+  <div class="box-content">
+    <form action="#" th:action="@{/profile_page/{idUser}/(idUser=${user.id})}" th:object="${user}" method="post">
+    <div class="col">
+      <div class="section">
+        <div class="profile-pic">
+          <label class="-label" for="file">
+            <img class="image" th:src="${user.imageProfileSrc}"
+                 style="width: 165px; height: 165px">
+            <input id="file" type="file" accept="image/*">
+          </label>
+        </div>
+        <br>
+        <h1 th:text="${user.username}"/>
+          <h3>Info:</h3>
+          <div>
+          <label>
+            Name:
+            <input type="text" class="form-control" th:field="*{name}" style="resize: none">
+          </label>
+          </div>
+          <div>
+          <label>
+            Surname:
+            <input type="text" class="form-control" th:field="*{surname}" style="resize: none">
+          </label>
+          </div>
+          <div>
+          <label>
+            Email:
+            <input type="email" class="form-control"  th:field="*{email}" style="resize: none">
+          </label>
+          </div>
+          <div>
+          <label>
+            Phone number:
+            <input type="number" class="form-control" th:field="*{phoneNumber}" style="resize: none">
+          </label>
+          </div>
+          <div>
+          <label>
+            Username:
+            <input type="text" class="form-control" th:field="*{username}" style="resize: none">
+          </label>
+          </div>
+          <div>
+          <label>
+            Password:
+            <input type="password" class="form-control" th:field="*{password}" style="resize: none">
+          </label>
+          </div>
+      </div>
+      <div class="descriptionFormat">
+        <h3>Description</h3>
+        <textarea id="textbox" th:field="*{description}" style="width: 400px; height: 600px; resize: none"></textarea>
+      </div>
+    </div>
+      <button id="btnSave" class="btn btn-danger" type="submit">Save</button>
+    </form>
+  </div>
+</div>
+<script th:inline="javascript">
+
+  function display() {
+    const textarea = document.getElementById('textbox').value;
+    console.log(textarea);
+  }
+
+  let imgFile = document.querySelector(".image");
+  console.log(imgFile.src);
+  console.log(imgFile);
+  // let loadFile = function(event) {
+  //   const image = document.querySelector(".image");
+  //   const input = document.querySelector('input');
+  //   // image.name = 'profile_picture.png';
+  //   console.log(event.target.files[0]);
+  //   // console.log(image.src);
+  //   //console.log(image.name);
+  //   // console.log(input);
+  //   // image.src = 'data:image/svg+xml;base64,' + input.name;
+  //   // console.log(image);
+  //   // const file = document.querySelector("input[type=file]").files[0];
+  //   // console.log(file);
+  //   // const reader = new FileReader();
+  //   // //console.log(reader);
+  //   // //
+  //   // reader.addEventListener(
+  //   //         "load",
+  //   //         () => {
+  //   //           // convert image file to base64 string
+  //   //           image.src = reader.result;
+  //   //           console.log(image.src)
+  //   //         },
+  //   //         false,
+  //   // );
+  //   // //
+  //   // if (file) {
+  //   //   reader.readAsDataURL(file);
+  //   //   console.log(file);
+  //   // }
+  //   // console.log(image.src);
+  //   // if (event.target.files[0].name.includes('.png')) {
+  //   //   console.log('Este de tip .png');
+  //   // }
+  //   image.src = URL.createObjectURL(event.target.files[0]);
+  //   console.log(image.src);
+  // }
+</script>
+</body>
+</html>

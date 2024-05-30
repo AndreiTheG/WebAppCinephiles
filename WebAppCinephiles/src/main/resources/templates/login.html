@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="icon" href="/image/Logo_image.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="/loginStyle.css" rel="stylesheet">
+</head>
+<body class="bg-danger">
+    <nav class="navbar navbar-expand-lg" style="background-color: black; height: 80px">
+        <a id="logo" th:href="@{/login/}"><img src="/image/Logo_image.png"
+                                               style="width: 40px; height: 40px; border-radius: 50%"></a>
+    </nav>
+    <div class="container h-100">
+      <div class="card" id="card">
+        <div class="card-body">
+            <div class="card-content">
+                <h1 class="card-title" style="text-align: center;">Login</h1>
+                <br>
+                <div class="form-border"></div>
+                <form id="form" action="#" th:action="@{/home/}" th:object="${user}" method="post">
+                    <label style="font-weight: bold"><i class="bi bi-person-fill"></i> Username:</label>
+                    <div class="form-group">
+                        <label>
+                            <input class="rounded-pill" id="username" type="text" style="width: 300px" th:field="*{username}">
+                        </label>
+                    </div>
+                    <div class="form-border"></div>
+                    <label style="font-weight: bold"><i class="bi bi-envelope-fill"></i> Password:</label>
+                    <div class="form-group">
+                        <label>
+                            <input class="rounded-pill" id="password"
+                                   type="password" style="width: 300px" th:field="*{password}">
+                        </label>
+                    </div>
+<!--                    <input type="checkbox" id="checkbox">-->
+<!--                    <label style="font-weight: bold">Remember me!</label>-->
+                    <br>
+                    <button class="btn btn-danger rounded-pill" id="signIn">Sign in</button>
+                    <a th:href="@{/register/}" class="btn btn-dark rounded-pill"
+                       id="createAccount" style="margin-left: 90px">Create account</a>
+                </form>
+                <p th:text="${message}" style="text-align: center; color: red"></p>
+                <div class="dropdown-divider"></div>
+            </div>
+        </div>
+      </div>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            let message = [[${message}]];
+            if (message === 'Incorrect username or password!' || message === 'You must write data!') {
+                let username = document.getElementById('username');
+                let password = document.getElementById('password');
+                username.className = 'border border-2 border-danger rounded-pill';
+                password.className = 'border border-2 border-danger rounded-pill';
+            }
+            /*]]>*/
+        </script>
+</div>
+</body>
+</html>

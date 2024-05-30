@@ -1,0 +1,146 @@
+#sidebar {
+    height : 100%;
+    width : 0;
+    position : fixed;
+    color: white;
+    z-index : 1;
+    top : 0;
+    left : 0;
+    background-color : #111;
+    overflow-x : hidden;
+    transition : 0.5s;
+}
+
+.form-popup {
+    background-color: #fff8f0;
+    border: 0 solid lightgrey;
+    display: none;
+    position: fixed;
+    margin-top: 50px;
+    margin-left: 230px;
+    width: 400px;
+    overflow-y: hidden;
+    /*top: 50px;*/
+    /*left: 500px;*/
+    /*bottom: 0;*/
+}
+
+.navbar-brand {
+    margin-left: auto;
+}
+
+#inputGroup {
+    width: 400px;
+}
+/*.form-popup #results:hover {*/
+/*    background-color: lightblue;*/
+/*}*/
+
+#facebook:hover {
+    transform: scale(1.2);
+}
+
+#instagram:hover {
+    transform: scale(1.2);
+}
+
+
+.myWatchlist:hover {
+    transform: scale(1.2);
+}
+
+.chat:hover {
+    transform: scale(1.2);
+}
+
+.list-group-item:hover {
+    opacity: 90%;
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+td {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+input:hover {
+    outline: none;
+}
+
+#main {
+    transition: margin-left .5s;
+}
+
+.ms-n5 {
+    margin-left: -40px;
+}
+
+.filter-list-checkboxes input {
+    accent-color: red;
+}
+
+@media screen and (max-width: 786px) {
+    #navbar {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+
+    .form-popup {
+        width: 300px;
+    }
+
+    .navbar-brand {
+        display: flex;
+        justify-content: flex-start;
+        margin: 0;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    #inputGroup {
+        display: flex;
+        /*display: block;*/
+        /*justify-content: center;*/
+        /*margin: auto;*/
+        float: left;
+        max-width: 300px;
+    }
+
+
+    /*#sidebar {*/
+    /*    display: none;*/
+    /*}*/
+
+    /*.flex-box {*/
+    /*    display: none;*/
+    /*}*/
+
+    /*.username {*/
+    /*    display: none;*/
+    /*}*/
+    /*#sidebar {*/
+    /*    height : 0;*/
+    /*    width : 100%;*/
+    /*    margin-top: 250px;*/
+    /*    transition : 0.5s;*/
+    /*    position : fixed;*/
+    /*    color: white;*/
+    /*    z-index : 1;*/
+    /*    top : 0;*/
+    /*    left : 0;*/
+    /*    background-color : #111;*/
+    /*}*/
+
+
+    .d-flex btn btn-danger {
+        margin-left: 0;
+    }
+
+    /*#logout {*/
+    /*    display: none;*/
+    /*}*/
+}

@@ -1,0 +1,34 @@
+#logo {
+    margin-left: 300px;
+}
+
+
+#card {
+    align-items: center;
+    background-color: #fff8f0;
+    position: absolute;
+    width: 400px;
+    height: 500px;
+    left: 40%;
+    top: 20%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/*#form {*/
+/*    margin: auto;*/
+/*    align-items: center;*/
+/*}*/
+
+p {
+    margin-left: 20px;
+}
+
+#signUp:hover {
+    cursor: pointer;
+    transform: scale(1.25);
+}
+
+#signIn:hover {
+    cursor: pointer;
+    transform: scale(1.25);
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+    <link rel="icon" href="/image/Logo_image.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="/registerStyle.css" rel="stylesheet">
+</head>
+<body class="bg-danger">
+    <div th:insert="~{login :: nav}"></div>
+    <div class="container h-100">
+        <div id="card" class="card">
+            <div id="card-body" class="card-body">
+                <div class="card-container">
+                    <div class="card-title">
+                        <h2 style="text-align: center">Register</h2>
+                    </div>
+                    <form id="form" action="#" th:action="@{/home/}" style="margin: auto; align-items: center; left: 40%" th:object="${user}" method="post">
+                        <label> <i class="bi bi-person-fill"></i> Name: </label>
+                        <div class="form-group">
+                            <input class="rounded-pill" type="text" id="name" style="width: 300px" th:field="*{name}">
+                            <br>
+                            <span th:text="${warningNameMessage}" style="color: red" />
+                        </div>
+                        <label> <i class="bi bi-person-fill"></i> Surname: </label>
+                        <div class="form-group">
+                            <input class="rounded-pill" type="text" id="surname" style="width: 300px" th:field="*{surname}">
+                            <br>
+                            <span th:text="${warningSurnameMessage}" style="color: red" />
+                        </div>
+                        <label><i class="bi bi-envelope-at-fill"></i> Email: </label>
+                        <div class="form-group">
+                            <input class="rounded-pill" type="text" id="email" style="width: 300px" th:field="*{email}">
+                            <br>
+                            <span th:text="${warningEmailMessage}" style="color: red" />
+                        </div>
+                        <label><i class="bi bi-telephone-fill"></i> Phone Number: </label>
+                        <div class="form-group">
+                            <input class="rounded-pill" type="text" id="phoneNumber" style="width: 300px" maxlength="10" th:field="*{phoneNumber}">
+                            <br>
+                            <span th:text="${warningPhoneNumMessage}" style="color: red" />
+                        </div>
+                        <label><i class="bi bi-person-fill"></i> Username: </label>
+                        <div class="form-group">
+                            <input class="rounded-pill" type="text" id="username" style="width: 300px" th:field="*{username}">
+                            <br>
+                            <span th:text="${warningUsernameMessage}" style="color: red" />
+                        </div>
+                        <label><i class="bi bi-envelope-fill"></i> Password: </label>
+                        <div class="form-group">
+                            <input class="rounded-pill" type="password" id="password" style="width: 300px" th:field="*{password}">
+                            <br>
+                            <span th:text="${warningPasswordMessage}" style="color: red" />
+                        </div>
+                        <br>
+                        <button th:href="@{/verify_user_data/}" class="btn btn-danger rounded-pill" type="submit" id="signUp" >Sign up</button>
+                        <a th:href="@{/login/}" class="btn btn-dark rounded-pill" style="margin-left: 140px" id="signIn">Sign in</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const warningNameMessage = [[${warningNameMessage}]];
+        const registerForm = document.getElementById('card');
+        let height = 500;
+        if (warningNameMessage === '*Name required') {
+            height += 20;
+            registerForm.style.height = '' + height + 'px';
+            let name = document.getElementById('name');
+            name.className = 'border border-2 border-danger rounded-pill';
+        }
+        const warningSurnameMessage = [[${warningSurnameMessage}]];
+        if (warningSurnameMessage === '*Surname required') {
+            height += 20;
+            registerForm.style.height = '' + height + 'px';
+            let surname = document.getElementById('surname');
+            surname.className = 'border border-2 border-danger rounded-pill';
+        }
+        const warningEmailMessage = [[${warningEmailMessage}]];
+        if (warningEmailMessage === '*Email required') {
+            height += 20;
+            registerForm.style.height = '' + height + 'px';
+            let email = document.getElementById('email');
+            email.className = 'border border-2 border-danger rounded-pill';
+        }
+        const warningPhoneNumMessage = [[${warningPhoneNumMessage}]];
+        if (warningPhoneNumMessage === '*Phone number required') {
+            height += 20;
+            registerForm.style.height = '' + height + 'px';
+            let phoneNumber = document.getElementById('phoneNumber');
+            phoneNumber.className = 'border border-2 border-danger rounded-pill';
+        }
+        const warningUsernameMessage = [[${warningUsernameMessage}]];
+        if (warningUsernameMessage === '*Username required') {
+            height += 20;
+            registerForm.style.height = '' + height + 'px';
+            let username = document.getElementById('username');
+            username.className = 'border border-2 border-danger rounded-pill';
+        }
+        const warningPasswordMessage = [[${warningPasswordMessage}]];
+        if (warningPasswordMessage === '*Password required') {
+            height += 20;
+            registerForm.style.height = '' + height + 'px';
+            let password = document.getElementById('password');
+            password.className = 'border border-2 border-danger rounded-pill';
+        }
+        /*]]>*/
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

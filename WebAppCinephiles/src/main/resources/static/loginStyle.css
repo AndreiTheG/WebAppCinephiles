@@ -1,0 +1,40 @@
+
+#logo {
+    margin-left: 300px;
+}
+
+#card {
+    align-items: center;
+    background-color: #fff8f0;
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    right: 50%;
+    width: 400px;
+    height: 300px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+#signIn:hover {
+    cursor: pointer;
+    transform: scale(1.25);
+}
+
+#createAccount:hover {
+    cursor: pointer;
+    transform: scale(1.25);
+}
+
+#checkbox:checked {
+    accent-color: red;
+}
+
+p {
+    margin: auto;
+}
+
+@media screen and (max-width: 786px) {
+    .card {
+       position: relative;
+    }
+}

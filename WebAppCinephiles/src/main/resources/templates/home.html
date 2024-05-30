@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RateUs</title>
+    <link rel="icon" href="/image/Logo_image.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/homeStyle.css">
+    <script src="https://kit.fontawesome.com/c83dc83a83.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-danger" id="main">
+    <nav class="navbar navbar-expand-lg" id="navbar" style="background-color: black">
+        <div id="sidebar" class="filter-list-checkboxes">
+            <i class="bi bi-x-lg" style="float: right; top: 1px" onclick="closeSidebar()"></i>
+            <br>
+            <h2 style="text-align: center;">Filters</h2>
+            <br>
+            <h4>Genres</h4>
+            <ul>
+                <li><input type="checkbox" id="Action" onclick="verifyGenreType()"> Action</li>
+                <li><input type="checkbox" id="Adventure" onclick="verifyGenreType()"> Adventure</li>
+                <li><input type="checkbox" id="Comedy" onclick="verifyGenreType()"> Comedy</li>
+                <li><input type="checkbox" id="Drama" onclick="verifyGenreType()"> Drama</li>
+                <li><input type="checkbox" id="SF" onclick="verifyGenreType()"> SF</li>
+                <li><input type="checkbox" id="Animation" onclick="verifyGenreType()"> Animation</li>
+                <li><input type="checkbox" id="Family" onclick="verifyGenreType()"> Family</li>
+                <li><input type="checkbox" id="Fantasy" onclick="verifyGenreType()"> Fantasy</li>
+            </ul>
+            <h4>Years releases</h4>
+            <ul>
+                <li><input type="checkbox" id="2020-Present" onclick="verifyGenreType()"> 2020-Present</li>
+                <li><input type="checkbox" id="2010-2019" onclick="verifyGenreType()"> 2010-2019</li>
+                <li><input type="checkbox" id="2000-2009" onclick="verifyGenreType()"> 2000-2009</li>
+                <li><input type="checkbox" id="1990-1999" onclick="verifyGenreType()"> 1990-1999</li>
+                <li><input type="checkbox" id="1980-1989" onclick="verifyGenreType()"> 1980-1989</li>
+                <li><input type="checkbox" id="1970-1979" onclick="verifyGenreType()"> 1970-1979</li>
+                <li><input type="checkbox" id="1960-1969" onclick="verifyGenreType()"> 1960-1969</li>
+                <li><input type="checkbox" id="1950-1959" onclick="verifyGenreType()"> 1950-1959</li>
+            </ul>
+            <h4>Ratings</h4>
+            <ul>
+                <li><input type="checkbox" id="rating10" onclick="verifyGenreType()"> 10</li>
+                <li><input type="checkbox" id="rating9" onclick="verifyGenreType()"> 9</li>
+                <li><input type="checkbox" id="rating8" onclick="verifyGenreType()"> 8</li>
+                <li><input type="checkbox" id="rating7" onclick="verifyGenreType()"> 7</li>
+                <li><input type="checkbox" id="rating6" onclick="verifyGenreType()"> 6</li>
+                <li><input type="checkbox" id="rating5" onclick="verifyGenreType()"> 5</li>
+                <li><input type="checkbox" id="rating4" onclick="verifyGenreType()"> 4</li>
+                <li><input type="checkbox" id="rating3" onclick="verifyGenreType()"> 3</li>
+                <li><input type="checkbox" id="rating2" onclick="verifyGenreType()"> 2</li>
+                <li><input type="checkbox" id="rating1" onclick="verifyGenreType()"> 1</li>
+            </ul>
+            <h4>Nr. reviews</h4>
+            <ul>
+                <li><input type="checkbox" id="nrReviews10" onclick="verifyGenreType()"> >= 1000 </li>
+                <li><input type="checkbox" id="nrReviews9" onclick="verifyGenreType()"> 900-999 </li>
+                <li><input type="checkbox" id="nrReviews8" onclick="verifyGenreType()"> 800-899 </li>
+                <li><input type="checkbox" id="nrReviews7" onclick="verifyGenreType()"> 700-799 </li>
+                <li><input type="checkbox" id="nrReviews6" onclick="verifyGenreType()"> 600-699 </li>
+                <li><input type="checkbox" id="nrReviews5" onclick="verifyGenreType()"> 500-599 </li>
+                <li><input type="checkbox" id="nrReviews4" onclick="verifyGenreType()"> 400-499 </li>
+                <li><input type="checkbox" id="nrReviews3" onclick="verifyGenreType()"> 300-399 </li>
+                <li><input type="checkbox" id="nrReviews2" onclick="verifyGenreType()"> 200-299 </li>
+                <li><input type="checkbox" id="nrReviews1" onclick="verifyGenreType()"> 100-199 </li>
+                <li><input type="checkbox" id="nrReviews0" onclick="verifyGenreType()"> <100 </li>
+            </ul>
+        </div>
+        <button id="menu" class="btn btn-danger" style="margin-left: auto" onclick="openSideBar()">
+            <i class="bi bi-list"></i>
+        </button>
+        <script th:inline="javascript">
+            function openSideBar() {
+                if (window.innerWidth > 786) {
+                    document.getElementById('sidebar').style.width = '250px';
+                    document.getElementById('main').style.marginLeft = '250px';
+                }
+            }
+
+            function closeSidebar() {
+                if (window.innerWidth > 786) {
+                    document.getElementById('sidebar').style.width = '0';
+                    document.getElementById('main').style.marginLeft = '0'
+                }
+            }
+
+            function verifyGenreType() {
+                let table = document.querySelector('.table');
+                table.innerHTML = '';
+                let genreList = ["Action", "Adventure", "Comedy", "Drama", "SF", "Animation", "Family", "Fantasy"];
+                let decades = ["1950-1959", "1960-1969", "1970-1979", "1980-1989", "1990-1999",
+                    "2000-2009", "2010-2019", "2020-Present"];
+                let ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                let nrReviews = ["<100", "100-199", "200-299", "300-399", "400-499", "500-599", "600-699",
+                    "700-799", "800-899", "900-999", ">=1000"];
+                let tbody = document.createElement('tbody');
+                let isChecked = false;
+                let isAFilterChecked = 0;
+                let listOfResults = [];
+                let userId = '';
+                /*<![DATA[*/
+                userId = [[${user.id}]];
+                console.log(userId)
+                let listOfMovies = [[${listOfMoviesAndTVSeries}]];
+                for (let i = 0; i < listOfMovies.length; ++i) {
+                    listOfResults[i] = Object.values(listOfMovies[i]);
+                }
+                for (let i = 0; i < listOfMovies.length; ++i) {
+                    console.log(listOfResults[i].length);
+                }
+                /*]]>*/
+                let checkedGenres = [], nrGenresChecked = 0;
+                for (let j = 0; j < genreList.length; ++j) {
+                    let element = document.getElementById(genreList[j]);
+                    if (element.checked) {
+                        checkedGenres[nrGenresChecked] = genreList[j];
+                        ++nrGenresChecked;
+                    }
+                }
+                let checkedLaunchDecades = [], nrYearsCheched = 0, minYear = 2029, maxYear = 1950;
+                for (let i = 0; i < decades.length; ++i) {
+                    let element = document.getElementById(decades[i]);
+                    if (element.checked) {
+                        checkedLaunchDecades[nrYearsCheched] = decades[i];
+                        let years = decades[i].split('-');
+                        if (years[1] === 'Present') {
+                            years[1] = 2029;
+                        }
+                        if (years[0] < minYear) {
+                            minYear = years[0];
+                        }
+                        if (years[1] > maxYear) {
+                            maxYear = years[1];
+                        }
+                        ++nrYearsCheched;
+                    }
+                }
+                console.log(minYear + ' ' + maxYear);
+                if (nrYearsCheched === 0) {
+                    let aux = minYear;
+                    minYear = maxYear;
+                    maxYear = aux;
+                }
+                console.log(minYear + ' ' + maxYear);
+                let checkedRatings = [], nrRatingsChecked = 0, minRating = 11, maxRating = 0;
+                for (let j = 0; j < ratings.length; ++j) {
+                    let element = document.getElementById('rating' + ratings[j] + '');
+                    if (element.checked) {
+                        if (ratings[j] > maxRating) {
+                            maxRating = ratings[j];
+                        }
+                        if (ratings[j] < minRating) {
+                            minRating = ratings[j];
+                        }
+                        checkedRatings[nrRatingsChecked] = ratings[j];
+                        ++nrRatingsChecked;
+                    }
+                }
+                console.log(minRating + ' ' + maxRating);
+                if (nrRatingsChecked === 0) {
+                    let aux = minRating;
+                    minRating = maxRating;
+                    maxRating = aux;
+                }
+                let checkedNrReviews = [], nrReviewsChecked = 0, minReview = 1000000000, maxReview = 0;
+                for (let j = 0; j < nrReviews.length; ++j) {
+                    let element = document.getElementById('nrReviews' + j + '');
+                    let values = nrReviews[j].split('-');
+                    if (element.checked) {
+                        if (values[0] === '<100') {
+                            maxReview = 100;
+                            minReview = 0;
+                        } else if (values[0] === '>=1000') {
+                            minReview = 1000;
+                            maxReview = 1000000000;
+                        }
+                        if (values[0] < minReview) {
+                            minReview = values[0];
+                        }
+                        if (values[1] > maxReview) {
+                            maxReview = values[1];
+                        }
+                        checkedNrReviews[nrReviewsChecked] = nrReviews[j];
+                        ++nrReviewsChecked;
+                    }
+                }
+                if (nrReviewsChecked === 0) {
+                    let aux = minReview;
+                    minReview = maxReview;
+                    maxReview = aux;
+                }
+                let card = document.querySelector('.listOfMovies');
+                for (let i = 0; i < listOfResults.length; ++i) {
+                    let movieGenres = listOfResults[i][2].split(', ');
+                    let nrElem = 0;
+                    for (let j = 0; j < nrGenresChecked; ++j) {
+                        for (let k = 0; k < movieGenres.length; ++k) {
+                            if (checkedGenres[j] === movieGenres[k]) {
+                                ++nrElem;
+                            }
+                        }
+                    }
+                    // let card = document.querySelector('.card');
+                    // let cardBody = document.createElement('div');
+                    // cardBody.className = 'card-body';
+                    if (nrElem === nrGenresChecked && listOfResults[i][3] >= minYear && listOfResults[i][3] <= maxYear
+                    && listOfResults[i][4] >= minRating && listOfResults[i][4] <= maxRating
+                    && listOfResults[i][10] >= minReview && listOfResults[i][10] <= maxReview) {
+                        // card.innerHTML += '<div class="card" id="' + listOfResults[i][0] + '"' +
+                        //     ' onclick="redirectToTheMoviePage(' + listOfResults[i][0] + ')"><div class="card-body"> + '
+                        //     '<img src='
+                        //     + listOfResults[i][9] + ' style="width: 50px; height: 50px">' +
+                        //     <h4 th:text="${list.name}" style="display: inline-block; vertical-align: middle"></h4>
+                        // <br>
+                        //     <i className="bi bi-star-fill"></i>
+                        //     <p th:text="${#numbers.formatDecimal(list.rating, 1, 2, 'POINT')}"
+                        //        style="display: inline-block; vertical-align: center; margin-right: 20px"></p>
+                        //     <i className="fa-solid fa-eye"></i>
+                        //     <p th:text="${list.nrReviews}" style="display: inline-block; vertical-align: center"></p>
+                        // </br>
+                           tbody.innerHTML += '<tr id="' + listOfResults[i][0] + '"' +
+                            ' onclick="redirectToTheMoviePage(' + userId + ', ' + listOfResults[i][0] + ')"><td class="col" style="width: 50px">' +
+                            '<img src='
+                            + listOfResults[i][9] + ' style="width: 50px; height: 50px"></td>' +
+                            '<td class="col" style="width: auto">' + listOfResults[i][1] + '</td>' +
+                            '<td><i class="bi bi-star-fill"><p>' + listOfResults[i][4].toFixed(2) + '</p></i></td>' +
+                            '<td><i class="fa-solid fa-eye"><p>' + listOfResults[i][10] + '</p></i></td></tr>';
+                    }
+
+                    console.log(nrElem);
+                }
+                if (nrYearsCheched === 0) {
+                    let aux = minYear;
+                    minYear = maxYear;
+                    maxYear = aux;
+                }
+                table.appendChild(tbody);
+                document.body.appendChild(table);
+                // card.appendChild(cardBody);
+                // document.appendChild(card);
+            }
+
+            function pressResult(idMovie) {
+                let idUser = 0;
+                /*<![CDATA[*/
+                idUser = [[${user.id}]];
+                /*]]>*/
+                // Navigate to the movie page with the selected movie name
+                console.log(idMovie);
+                let currentResult = document.getElementById('' + idMovie + '');
+                currentResult.href = "/" + idUser + "/movie_page/" + idMovie + "/";
+                console.log(currentResult.href)
+            }
+
+            function results() {
+                let listOfResults = [];
+                let inputGroup = document.getElementById('inputGroup');
+                let resultsGroup = document.querySelector('.form-popup');
+                resultsGroup.style.display = 'block';
+                /*<![CDATA[*/
+                let listOfMovies = [[${listOfMoviesAndTVSeries}]];
+                for (let i = 0; i < listOfMovies.length; ++i) {
+                    listOfResults[i] = Object.values(listOfMovies[i]);
+                }
+                /*]]>*/
+                let nrMovies = listOfResults.length;
+                console.log(nrMovies);
+                let string = '';
+                document.addEventListener("keydown", (event) => {
+                    if (event.key === 'Backspace') {
+                        let len = string.length;
+                        resultsGroup.innerHTML = "";
+                        console.log(len);
+                        --len;
+                        string = string.substring(0, len);
+                        if (len >= 1) {
+                            resultsGroup.style.borderWidth = '2px';
+                            for (let i = 0; i < nrMovies; ++i) {
+                                if (listOfResults[i][1].includes(string) || listOfResults[i][1].toLowerCase().
+                                    includes(string.toLowerCase())
+                                    || listOfResults[i][1].toUpperCase().includes(string.toUpperCase())) {
+                                    resultsGroup.innerHTML += '<div class="card"><ul class="list-group list-group-flush">' +
+                                        '<a class="list-group-item" methods="GET"  id="' + listOfResults[i][0] + '"' +
+                                        'onclick="pressResult(' + + listOfResults[i][0] + ')"' +
+                                        '>' + listOfResults[i][1] + '</a>' +
+                                        '</ul></div>';
+                                }
+                            }
+                        } else {
+                            resultsGroup.style.borderWidth = '0px';
+                        }
+                    } else if (event.key.length === 1) {
+                        resultsGroup.innerHTML = "";
+                        resultsGroup.style.borderWidth = '2px';
+                        string += event.key;
+                        let dropdownContent = document.createElement('div');
+                        dropdownContent.className = 'dropdown-content';
+                        for (let i = 0; i < nrMovies; ++i) {
+                            if (listOfResults[i][1].includes(string) || listOfResults[i][1].includes(string.toLowerCase())
+                                || listOfResults[i][1].includes(string.toUpperCase()) ||
+                                listOfResults[i][1].toUpperCase().includes(string.toUpperCase()) ||
+                                listOfResults[i][1].toLowerCase().includes(string.toLowerCase())) {
+                                resultsGroup.innerHTML += '<div class="card"><ul class="list-group list-group-flush">' +
+                                    '<a class="list-group-item" ' +
+                                    'methods="GET" id="' + listOfResults[i][0] + '" ' +
+                                    'onclick="pressResult(' + listOfResults[i][0] + ')"' +
+                                    '>' + listOfResults[i][1] + '</a>' +
+                                    '</ul></div>';
+                            }
+                        }
+                    }
+                });
+                inputGroup.appendChild(resultsGroup);
+            }
+        </script>
+        <a class="navbar-brand" th:href="@{/home/{userId}/(userId=${user.id})}" style="color: white;"><img src="/image/Logo_image.png" style="width: 40px;
+            height: 40px; border-radius: 50%"></a>
+        <div id="inputGroup" style="margin-left: auto; margin-right: auto" class="input-group" th:method="GET">
+            <button class="btn btn-danger rounded-start-pill dropdown"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input onclick="results()" id="input" type="text" class="form-control rounded-end-pill"
+                   placeholder="Input group example"
+                   aria-label="Input group example" aria-describedby="basic-addon1">
+            <div class="form-popup dropdown" id="resultGroup" role="listbox" style="border-radius: 10px;"></div>
+        </div>
+            <a id="facebook" href="https://www.facebook.com/andreialex.alexandru/"><i class="bi bi-facebook" style="color: white;"></i></a>
+            <a id="instagram" href="https://www.instagram.com/andrei2631/"><i class="bi bi-instagram" style="margin-left: 20px; color: white;"></i></a>
+        <a class="myWatchlist" style="margin-left: 20px" th:href="@{/{idUser}/watchlist/(idUser=${user.id})}"><i class="bi bi-bookmark-fill" style="color: white"></i></a>
+        <a class="chat" style="margin-left: 20px" th:href="@{/chat/{idUserSender}/(idUserSender=${user.id})}"><i class="bi bi-chat-fill" style="color: white"></i></a>
+        <div class="dropdown" style="margin-left: 20px; margin-right: auto">
+            <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${user.username}">
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" th:href="@{/profile_page/{idUser}/(idUser=${user.id})}">View Profile</a></li>
+<!--                <li><a class="dropdown-item" th:href="@{/premiumSubscription/}">Premium Option</a></li>-->
+                <li><a id="logout" class="dropdown-item bg-danger" th:href="@{/login/}">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
+    <table class="table" style="background-color: white; grid-auto-columns: 100px">
+        <tbody>
+           <tr th:each="list : ${listOfMoviesAndTVSeries}" th:id="${list.id}"
+               th:onclick="'redirectToTheMoviePage(' + ${user.id} + ', '+ ${list.id} + ')'">
+                <td class="col" style="width: 50px">
+                    <img th:src="${list.imageCover}"
+                style="width: 50px; height: 50px"></td>
+                <td class="col" th:text="${list.name}" style="width: auto"></td>
+                <td class="col"><i class="bi bi-star-fill"><p th:text="${#numbers.formatDecimal(list.rating, 1, 2, 'POINT')}"></p></i></td>
+                <td class="col"><i class="fa-solid fa-eye"><p th:text="${list.nrReviews}"></p></i></td>
+            </tr>
+        </tbody>
+    </table>
+    <script th:inline="javascript">
+        function redirectToTheMoviePage(idUser, idMovie) {
+            let trValue = document.getElementById(idMovie);
+            window.location.href = "/" + idUser + "/movie_page/" + idMovie + "/";
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</body>
+</html>

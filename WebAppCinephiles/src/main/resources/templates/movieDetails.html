@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link rel="icon" href="/image/Logo_image.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/moviePageStyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://kit.fontawesome.com/c83dc83a83.js" crossorigin="anonymous"></script>
+</head>
+<body  class="bg-danger" id="main">
+<script th:inline="javascript">
+    let isCurrentStarClicked = [false, false, false, false, false, false, false, false,
+    false, false];
+    let nrTotalStars = 0;
+    // /*<![DATA[*/
+    // // nrStars = [[${review.rating}]];
+    // // console.log(nrStars);
+    // let listOfReviews = [[${listOfReviews}]];
+    // console.log(listOfReviews);
+    // /*]]>*/
+    // /*<![DATA[*/
+    // nrStars = [[${review.rating}]];
+    // console.log(nrStars);
+    // /*]]>*/
+    // for (let i = 0; i < nrStars; ++i) {
+    //     let star = document.getElementById('' + (i + 1) + '');
+    //     star.style.color = 'yellow';
+    // }
+    // function mouseOver(number) {
+    //     for (let i = 0; i < number; ++i) {
+    //         console.log(i);
+    //         let star = document.getElementById('' + (i + 1) + '');
+    //         star.style.color = 'red';
+    //     }
+    //     if (number < 10) {
+    //         for (let i = number; i < 10; ++i) {
+    //             console.log(i);
+    //             let star = document.getElementById('' + (i + 1) + '');
+    //             star.style.color = 'black';
+    //         }
+    //     }
+    // }
+    //
+    // function mouseOut(number) {
+    //     for (let i = 0; i < 10; ++i) {
+    //         console.log(isCurrentStarClicked[i]);
+    //     }
+    //     for (let i = 1; i <= number - 1; ++i) {
+    //         console.log(i);
+    //         let star = document.getElementById('' + i + '');
+    //         star.style.color = 'yellow';
+    //     }
+    //     // if (document.getElementById('' + number + '').onclick === false) {
+    //     //     console.log('Nu a fost apasat');
+    //     // }
+    //     if (isCurrentStarClicked[number - 1] === false && number < 10) {
+    //         for (let i = number; i <= 10; ++i) {
+    //             console.log(i);
+    //             let star = document.getElementById('' + i + '');
+    //             let color = star.color;
+    //             console.log(color);
+    //             star.style.color = 'black';
+    //         }
+    //     }
+    // }
+
+    function pressStar(number) {
+        console.log(number)
+        nrTotalStars = number;
+        for (let i = 0; i < 10; ++i) {
+            console.log(isCurrentStarClicked[i]);
+        }
+        isCurrentStarClicked[number - 1] = true;
+        for (let i = 0; i < number; ++i) {
+            console.log(i);
+            let star = document.getElementById('' + (i + 1) + '');
+            star.style.color = 'red';
+            console.log(star.style.color);
+        }
+        if (number < 10) {
+            for (let i = number; i < 10; ++i) {
+                console.log(i);
+                let star = document.getElementById('' + (i + 1) + '');
+                star.style.color = 'black';
+            }
+        }
+        console.log(number);
+        let input = document.getElementById("inputStar");
+        input.value = number;
+        console.log(input);
+    }
+</script>
+    <nav th:insert="~{home.html :: nav}"></nav>
+<!--    <div class="card" style="height: auto; margin-left: 15%; margin-right: 15%">-->
+<!--        <div class="card-body">-->
+    <div class="box">
+        <div class="box-content">
+<!--            <div class="card">-->
+<!--                <div class="card-body">-->
+            <h1 class="title" th:text="${movie.name}"></h1>
+            <br>
+            <div class="col">
+                <div class="cover-image">
+                    <img th:src="${movie.imageCover}" style="width: 150px; height: 200px">
+                    <form action="#" th:action="@{/{idUser}/movie_page/{idMovie}/addFilm/(idUser=${user.id}, idMovie=${movie.id})}" th:object="${userFilmKey}" th:method="POST">
+                        <button type="submit" th:field="*{movieId}" class="btn btn-danger"><i class="bi bi-bookmark-plus"></i></button>
+<!--                        <input type="submit" th:field="*{movieId}" class="btn btn-danger" value="<i class="bi bi-bookmark-plus"></i>Send">-->
+<!--                        <i class="bi bi-bookmark-plus"></i>-->
+                    </form>
+                    <div>
+                        <h5 th:text="'Rating: ' + ${average}"></h5>
+                        <h5 th:text="'Total Reviews: ' + ${totalReviews}"></h5>
+                    </div>
+                    <div class="dropdown">
+                        <form action="#" th:action="@{/{idUser}/movie_page/{idMovie}/(idUser=${user.id}, idMovie=${movie.id})}" th:object="${review}" method="post">
+                            <div class="col">
+                                <i class="bi bi-star-fill" id="1" onclick="pressStar(1)"></i>
+                                <i class="bi bi-star-fill" id="2" onclick="pressStar(2)"></i>
+                                <i class="bi bi-star-fill" id="3" onclick="pressStar(3)"></i>
+                                <i class="bi bi-star-fill" id="4" onclick="pressStar(4)"></i>
+                                <i class="bi bi-star-fill" id="5" onclick="pressStar(5)"></i>
+                                <i class="bi bi-star-fill" id="6" onclick="pressStar(6)"></i>
+                                <i class="bi bi-star-fill" id="7" onclick="pressStar(7)"></i>
+                                <i class="bi bi-star-fill" id="8" onclick="pressStar(8)"></i>
+                                <i class="bi bi-star-fill" id="9" onclick="pressStar(9)"></i>
+                                <i class="bi bi-star-fill" id="10" onclick="pressStar(10)"></i>
+                            </div>
+                            <input id="inputStar" type="hidden" th:field="*{rating}">
+                            <button class="btn btn-dark" type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="description">
+                    <h5>Description</h5>
+                    <p th:text="${movie.description}"></p>
+                    <p th:text="'Director: ' + ${movie.directorName}"></p>
+                    <p th:text="'Writer: ' + ${movie.writer}"></p>
+                    <h5>Genres</h5>
+<!--                    <a href="actorPage.html" th:text="${movie.genres}"></a>-->
+<!--                    <table>-->
+                    <div th:each="genre : ${genres}" style="display: inline-block">
+                        <div class="card" th:id="${genre.idGenre}">
+                            <a th:text="${genre.name}"></a>
+                        </div>
+                    </div>
+                    <br>
+<!--                    </table>-->
+                    <h5>Actors</h5>
+                    <div th:each="actor : ${actors}" style="display: inline-block">
+                        <div class="card">
+                            <a th:text="${actor.name}" ></a>
+                        </div>
+                    </div>
+<!--                    <p th:text="${actors}"></p>-->
+                    <div id="commentSection">
+                        <canvas id="myChart"></canvas>
+                        <form action="#" th:action="@{/{idUser}/movie_page/{idMovie}/(idUser=${user.id}, idMovie=${movie.id})}"
+                              th:object="${comment}" method="post">
+                            <textarea id="commentBox" th:field="*{content}"></textarea>
+                            <button class="btn btn-dark" type="submit">Add</button>
+                        </form>
+                    </div>
+                    <h5>Comments</h5>
+                    <div th:each="comments: ${listOfComments}">
+                        <div class="card-container">
+                            <div class="card">
+                                <div class="username" style="display: flex; justify-content: flex-start">
+                                    <h6 th:text="${comments.username}"></h6>
+                                </div>
+                                <div class="card-body">
+                                    <p th:text="${comments.content}"></p>
+                                </div>
+                                <div id="data-post" style="display: flex; justify-content: flex-end">
+                                    <small th:text="${comments.datePost}"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        let textarea = document.getElementById('commentBox');
+        textarea.textContent = '';
+        let nrStars = 0;
+        let xValues = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+        let yValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let barColors = ["black", "black", "black", "black", "black", "black", "black", "black", "black", "black"];
+        /*<![DATA[*/
+        nrStars = [[${review.rating}]];
+        console.log(nrStars);
+        let listOfReviews = [[${listOfRating}]];
+        for (let i = 0; i < 10; ++i) {
+            for (let j = 0; j < listOfReviews.length; ++j) {
+                console.log(listOfReviews[j]['rating']);
+                if (listOfReviews[j]['rating'] === parseInt(xValues[i])) {
+                    ++yValues[i];
+                }
+            }
+        }
+        for (let i = 0; i < listOfReviews.length; ++i) {
+            console.log(listOfReviews[i]['rating']);
+        }
+        /*]]>*/
+        console.log(nrStars);
+        for (let i = 0; i < nrStars; ++i) {
+            console.log(i);
+            let star = document.getElementById('' + (i + 1) + '');
+            star.style.color = 'red';
+            console.log(star);
+        }
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Number of ratings per grade"
+                }
+            }
+        });
+    </script>
+</body>
+</html>
