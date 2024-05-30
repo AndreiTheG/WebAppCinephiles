@@ -11,10 +11,7 @@ import java.util.List;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findByIdMovie(long idMovie);
-    
 
     @Query("select c, u.username from Comment c, User u where c in :comments and c.idUser = u.id order by c.datePost desc")
     List<Comment> listComments(List<Comment> comments);
-
-
 }
