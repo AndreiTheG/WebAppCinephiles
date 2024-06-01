@@ -259,6 +259,7 @@
                         string = string.substring(0, len);
                         if (len >= 1) {
                             resultsGroup.style.borderWidth = '2px';
+                            let nrResults = 0;
                             for (let i = 0; i < nrMovies; ++i) {
                                 if (listOfResults[i][1].includes(string) || listOfResults[i][1].toLowerCase().
                                     includes(string.toLowerCase())
@@ -268,17 +269,23 @@
                                         'onclick="pressResult(' + + listOfResults[i][0] + ')"' +
                                         '>' + listOfResults[i][1] + '</a>' +
                                         '</ul></div>';
+                                    ++nrResults;
                                 }
+                            }
+                            if (nrResults === 0) {
+                                resultsGroup.innerHTML = '<p>No results...</p>';
                             }
                         } else {
                             resultsGroup.style.borderWidth = '0px';
                         }
+
                     } else if (event.key.length === 1) {
                         resultsGroup.innerHTML = "";
                         resultsGroup.style.borderWidth = '2px';
                         string += event.key;
                         let dropdownContent = document.createElement('div');
                         dropdownContent.className = 'dropdown-content';
+                        let nrResults = 0;
                         for (let i = 0; i < nrMovies; ++i) {
                             if (listOfResults[i][1].includes(string) || listOfResults[i][1].includes(string.toLowerCase())
                                 || listOfResults[i][1].includes(string.toUpperCase()) ||
@@ -290,7 +297,11 @@
                                     'onclick="pressResult(' + listOfResults[i][0] + ')"' +
                                     '>' + listOfResults[i][1] + '</a>' +
                                     '</ul></div>';
+                                ++nrResults;
                             }
+                        }
+                        if (nrResults === 0) {
+                            resultsGroup.innerHTML = '<p>No results...</p>';
                         }
                     }
                 });
