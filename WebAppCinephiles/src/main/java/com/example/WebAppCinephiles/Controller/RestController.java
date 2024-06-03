@@ -6,7 +6,6 @@ import com.example.WebAppCinephiles.Models.User;
 import com.example.WebAppCinephiles.Repositories.CommentRepository;
 import com.example.WebAppCinephiles.Repositories.MoviesAndTVSeriesRepository;
 import com.example.WebAppCinephiles.Repositories.UserRepository;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -47,7 +46,6 @@ public class RestController {
 
     @GetMapping("/api/movie/:{id}/comments")
     public List<Comment> getTheComments(@PathVariable("id") long id) {
-        List<Comment> listComments = commentRepository.findByIdMovie(id);
-        return listComments;
+        return commentRepository.findByIdMovie(id);
     }
 }
